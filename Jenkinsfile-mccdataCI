@@ -1,0 +1,35 @@
+node {
+    stage ("Checkout DataService"){
+        git branch: 'main', url: 'https://github.com/foxwas/oct-2024-bah-mcc-data.git'
+    }
+    
+    stage ("Gradle Clean - DataService") {
+	
+        sh 'gradle clean build'
+
+    }
+    stage ("Gradle Build - DataService") {
+	
+        sh 'gradle build'
+
+    }
+	
+    stage ("Gradle Teat - DataService") {
+        sh 'gradle test'
+    }
+    
+    stage('User Acceptance Test - DataService') {
+	
+	  def response= input message: 'Is this build good to go?',
+	   parameters: [choice(choices: 'Yes\nNo', 
+	   description: '', name: 'Pass')]
+	
+	  if(response=="Yes") {
+
+	    stage('Release- DataService') {
+	     sh 'echo DataService is ready to release!'
+
+	    }
+	  }
+    }
+}
