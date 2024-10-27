@@ -5,17 +5,17 @@ node {
     
     stage ("Gradle Clean - DataService") {
 	
-        sh 'gradle clean build'
+        'gradle clean'
 
     }
     stage ("Gradle Build - DataService") {
 	
-        sh 'gradle build'
+        'gradle build'
 
     }
 	
     stage ("Gradle Teat - DataService") {
-        sh 'gradle test'
+        'gradle test'
     }
     
     stage('User Acceptance Test - DataService') {
@@ -27,7 +27,7 @@ node {
 	  if(response=="Yes") {
 
 	    stage('Release- DataService') {
-	     sh 'echo DataService is ready to release!'
+	     'echo DataService is ready to release!'
 
 	    }
 	  }
